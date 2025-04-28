@@ -1,0 +1,17 @@
+{
+  "name": "my-agentic-project",
+  "version": "1.0.0",
+  "description": "An agentic project for task automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc"
+  },
+  "keywords": ["agent", "automation"],
+  "author": "",
+  "license": "ISC"
+}

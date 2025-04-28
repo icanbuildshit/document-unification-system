@@ -1,0 +1,24 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.1, pytest-8.3.5, pluggy-1.5.0
+rootdir: E:\sort
+configfile: pytest.ini
+plugins: anyio-4.8.0, langsmith-0.3.37, asyncio-0.26.0, cov-6.1.1, mock-3.14.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 0 items / 1 error
+
+=================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_validator_agent.py ________________
+ImportError while importing test module 'E:\sort\tests\test_validator_agent.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\Randy\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_validator_agent.py:3: in <module>
+    from src.agents.validator_agent import ValidatorAgent
+src\agents\validator_agent.py:2: in <module>
+    import spacy
+E   ModuleNotFoundError: No module named 'spacy'
+=========================== short test summary info ===========================
+ERROR tests/test_validator_agent.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+============================== 1 error in 0.10s ===============================

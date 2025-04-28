@@ -1,0 +1,178 @@
+{
+  "metadata": {},
+  "chunks": [
+    {
+      "text": "Okay, that shifts the focus from training a model from scratch or fine-tuning its core abilities to providing an existing powerful language model with access to your specific knowledge base at the time you ask it a question. This is amuch more practical and widely used approach for leveraging custom data with LLMs, especially for detailed and domain-specific tasks like developing a sophisticated enterprise web application based on particular frameworks and practices.",
+      "metadata": {
+        "type": "NarrativeText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_0"
+      }
+    },
+    {
+      "text": "The best way to achieve this, allowing an LLM like Cursor or any other capable model to \"read through your shit\" (your gathered research in Markdown files), is by implementing a",
+      "metadata": {
+        "type": "NarrativeText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_1"
+      }
+    },
+    {
+      "text": "Retrieval-Augmented Generation (RAG) system.",
+      "metadata": {
+        "type": "Title",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_2"
+      }
+    },
+    {
+      "text": "Here's how RAG works and why it's the ideal approach for your goal:",
+      "metadata": {
+        "type": "NarrativeText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_3"
+      }
+    },
+    {
+      "text": "Understanding Retrieval-Augmented Generation (RAG)",
+      "metadata": {
+        "type": "Title",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_4"
+      }
+    },
+    {
+      "text": "Instead of trying to embed all your specific knowledge into the model itself through expensive and complex training (which would also quickly become outdated), RAG allows you to:",
+      "metadata": {
+        "type": "NarrativeText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_5"
+      }
+    },
+    {
+      "text": "1. Index Your Knowledge: Process your Markdown files and convert them into a searchable format.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_6"
+      }
+    },
+    {
+      "text": "2. Retrieve Relevant Information: When you ask the LLM a question (e.g., \"How do | implement X feature using Y framework based on the patterns in my notes?\"), the RAG system first searches your indexed research to find the most relevant pieces of information.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_7"
+      }
+    },
+    {
+      "text": "3. Augment the Prompt: The retrieved relevant information is then added to your original question, creating an enriched prompt.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_8"
+      }
+    },
+    {
+      "text": "4. Generate the Response: The LLM receives this augmented prompt (your question + relevant context from your Markdown files) and uses this information to generate a more accurate, specific, and contextually relevant response, including code.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_9"
+      }
+    },
+    {
+      "text": "How to Index Your Research for RAG:",
+      "metadata": {
+        "type": "Title",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_10"
+      }
+    },
+    {
+      "text": "The core of “indexing” for RAG involves transforming your Markdown files into a format that allows for efficient semantic search. Here are the key steps:",
+      "metadata": {
+        "type": "NarrativeText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_11"
+      }
+    },
+    {
+      "text": "1. Load Your Data: Read the content from all your Markdown files. Libraries in languages like Python (e.g., using langchain or llamaindex with appropriate document loaders for Markdown) are excellent for this.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_12"
+      }
+    },
+    {
+      "text": "Split into Chunks: Divide the loaded content into smaller, manageable pieces called “chunks.” This is a crucial step.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_13"
+      }
+    },
+    {
+      "text": "2.",
+      "metadata": {
+        "type": "UncategorizedText",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_14"
+      }
+    },
+    {
+      "text": "o Why Chunk? LLMs have a limited context window (the amount of text they can process at once). You can't feed it your entire research library. Chunking breaks it down.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_15"
+      }
+    },
+    {
+      "text": "o Smart Chunking for Markdown: Simply splitting by character count isn't optimal. You need to split intelligently based on the Markdown structure. Libraries can help split by headings, code blocks, paragraphs, etc., ensuring that a code example stays with its explanation or a best practice is linked to the concept it describes. Preserving local context within chunks is vital for retrieval quality.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_16"
+      }
+    },
+    {
+      "text": "3. Create Embeddings: Convert each text chunk into a numerical vector (an embedding) using an embedding model.",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_17"
+      }
+    },
+    {
+      "text": "o What are Embeddings? Embeddings are numerical representations of text where",
+      "metadata": {
+        "type": "ListItem",
+        "page_number": null,
+        "coordinates": null,
+        "element_id": "chunk_18"
+      }
+    }
+  ],
+  "tables": [],
+  "images": []
+}

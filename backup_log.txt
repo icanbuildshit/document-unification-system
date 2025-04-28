@@ -1,0 +1,81 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Monday, April 28, 2025 1:07:03 PM
+   Source : E:\sort\
+     Dest : E:\sort_backup\
+
+    Files : *.*
+	    
+ Exc Dirs : .venv
+	    .git
+	    .pytest_cache
+	    .cursor
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /Z /XA:H /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	  New Dir          9	E:\sort\
+	    New File  		     600	.env100%  
+	    New File  		     624	.env.example100%  
+	    New File  		     604	.gitignore100%  
+	    New File  		       0	backup_log.txt100%  
+	    New File  		       1	main.py100%  
+	    New File  		     105	pytest.ini100%  
+	    New File  		    3479	README.md100%  
+	    New File  		      47	requirements.txt100%  
+	    New File  		    1397	validator_test.log100%  
+	  New Dir          2	E:\sort\agents\
+	    New File  		    2886	base_agent.py100%  
+	    New File  		       1	__init__.py100%  
+	  New Dir          0	E:\sort\data\
+	  New Dir          1	E:\sort\data\input\
+	    New File  		      14	.gitkeep100%  
+	  New Dir          1	E:\sort\data\intermediate\
+	    New File  		      14	.gitkeep100%  
+	  New Dir          1	E:\sort\data\output\
+	    New File  		      14	.gitkeep100%  
+	  New Dir          0	E:\sort\input\
+	  New Dir          1	E:\sort\logs\
+	    New File  		      14	.gitkeep100%  
+	  New Dir          0	E:\sort\output\
+	  New Dir          0	E:\sort\src\
+	  New Dir          2	E:\sort\src\agents\
+	    New File  		    5938	parser_agent.py100%  
+	    New File  		    4266	validator_agent.py100%  
+	  New Dir          1	E:\sort\src\agents\__pycache__\
+	    New File  		    5907	validator_agent.cpython-313.pyc100%  
+	  New Dir          3	E:\sort\src\utils\
+	    New File  		    8816	chunking.py100%  
+	    New File  		    2050	env_manager.py100%  
+	    New File  		    6842	memory_manager.py100%  
+	  New Dir          0	E:\sort\src\workflows\
+	  New Dir          4	E:\sort\tests\
+	    New File  		    2090	test_parser_agent.py100%  
+	    New File  		     811	test_validator_agent.py100%  
+	    New File  		    4557	test_workflow.py100%  
+	    New File  		      16	__init__.py100%  
+	  New Dir          4	E:\sort\tests\__pycache__\
+	    New File  		    1915	test_parser_agent.cpython-313-pytest-8.3.5.pyc100%  
+	    New File  		    1888	test_validator_agent.cpython-313-pytest-8.3.5.pyc100%  
+	    New File  		    3646	test_workflow.cpython-313-pytest-8.3.5.pyc100%  
+	    New File  		     122	__init__.cpython-313.pyc100%  
+	  New Dir          1	E:\sort\utils\
+	    New File  		       1	__init__.py100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        20        17         3         0         0         0
+   Files :        30        30         0         0         0         0
+   Bytes :    57.2 k    57.2 k         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :           3,666,562 Bytes/sec.
+   Speed :             209.802 MegaBytes/min.
+   Ended : Monday, April 28, 2025 1:07:03 PM
+
