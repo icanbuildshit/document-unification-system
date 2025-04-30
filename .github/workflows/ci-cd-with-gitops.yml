@@ -1,0 +1,100 @@
+name: CI/CD with GitOps
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '**.md'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest -v
+
+  build:
+    needs: test
+    uses: ./.github/workflows/optimized-docker-build.yml
+
+  deploy-dev:
+    needs: build
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: dev
+      image_tag: ${{ github.sha }}
+    secrets:
+      KUBE_CONFIG: ${{ secrets.DEV_KUBE_CONFIG }}
+
+  deploy-staging:
+    needs: [build, deploy-dev]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: staging
+      image_tag: ${{ github.sha }}
+    secrets:
+      KUBE_CONFIG: ${{ secrets.STAGING_KUBE_CONFIG }}
+
+  deploy-canary:
+    needs: [build, deploy-staging]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: prod
+      image_tag: ${{ github.sha }}
+      deployment_type: canary
+    secrets:
+      KUBE_CONFIG: ${{ secrets.PROD_KUBE_CONFIG }}
+
+  verify-canary:
+    needs: deploy-canary
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Verify canary metrics
+        env:
+          KUBE_CONFIG: ${{ secrets.PROD_KUBE_CONFIG }}
+        run: |
+          # Check error rates from Prometheus
+          ERROR_RATE=$(kubectl exec -n monitoring prometheus-server -- \
+            curl -s "http://localhost:9090/api/v1/query?query=rate(http_requests_total{status=~'5..',deployment='canary'}[1m])" | \
+            jq -r '.data.result[0].value[1]')
+          
+          # Check latency from Prometheus
+          LATENCY=$(kubectl exec -n monitoring prometheus-server -- \
+            curl -s "http://localhost:9090/api/v1/query?query=histogram_quantile(0.95,rate(http_request_duration_seconds_bucket{deployment='canary'}[1m]))" | \
+            jq -r '.data.result[0].value[1]')
+          
+          echo "Canary error rate: $ERROR_RATE"
+          echo "Canary latency: $LATENCY"
+          
+          # Fail if error rate > 1% or latency > 500ms
+          if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )) || (( $(echo "$LATENCY > 0.5" | bc -l) )); then
+            echo "Canary verification failed - metrics out of bounds"
+            exit 1
+          fi
+          
+          echo "Canary verification passed"
+
+  deploy-prod:
+    needs: [build, deploy-staging, verify-canary]
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: prod
+      image_tag: ${{ github.sha }}
+      deployment_type: full
+    secrets:
+      KUBE_CONFIG: ${{ secrets.PROD_KUBE_CONFIG }}
