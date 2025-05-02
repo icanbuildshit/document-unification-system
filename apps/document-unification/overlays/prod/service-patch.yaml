@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: document-unification
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/path: "/metrics"
+    external-dns.alpha.kubernetes.io/hostname: "document-unification.example.com"
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+spec:
+  type: LoadBalancer
+  selector:
+    app: document-unification
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  - name: https
+    port: 443
+    targetPort: 8000
